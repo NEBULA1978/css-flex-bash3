@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS FLEX</title>
+    <style>
+        /* EJEMPLO 1: */
+
+        .contenedor {
+            display: flex;
+        }
+
+        .elemento {
+            width: 25%;
+            background-color: aqua;
+        }
+
+        /* Como vemos, al no haber definido aún el comportamiento de dirección y tamaño que tendrán los elementos de nuestro contenedor, aunque hayamos definido una anchura de elementos del 25% éstos se adaptan a su padre ocupando el 100% de anchura entre la suma de todos. Por defecto, tiene ese comportamiento “flexible” como indica su nombre. Pero Flexbox es mucho más. */
+
+        /* flex-direction:
+        Vamos a ver la propiedad “flex-direction“, que puede tomar 4 valores y se aplica al padre (contenedor):
+
+        – flex-direction:row; -> Los elementos se visualizan de izquierda a derecha (valor por defecto, similar al ejemplo 1)
+        – flex-direction:row-reverse; -> Los elementos se visualizan de derecha a izquierda.
+        – flex-direction:column; -> Los elementos se visualizan de arriba hacia abajo.
+        – flex-direction:column-reverse; -> Los elementos se visualizan de abajo hacia arriba. */
+
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 2: */
+
+        .contenedor {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        /* Los elementos invierten su orden de visualización de derecha a izquierda, sin tener en cuenta el orden de la maquetación. */
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 3: */
+
+        .contenedor {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Los elementos se visualizan formando una columna de arriba hacia abajo. En este caso, como los elementos miden el 25% del contenedor, su anchura sí que toma el valor indicado. Si eliminamos la anchura, las capas se ajustarán al tamaño del contenedor, ocupando el 100% de anchura. */
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 4: */
+
+        .contenedor {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        /* Los elementos se visualizan formando una columna de abajo hacia arriba, sin tener en cuenta el orden de la maquetación. La anchura funciona de forma similar al ejemplo 3. */
+
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+
+        /* flex-wrap:
+        A continuación vamos a ver la propiedad “flex-wrap“, cuyo valor afecta a cómo se distribuyen los elementos en fila y, por consiguiente, a su tamaño. Los posibles valores son:
+
+        – flex-wrap:nowrap; -> Los elementos se muestran en línea, en una sola fila, y su tamaño se ajusta al contenedor siempre y cuando la suma de todos ellos sea mayor o igual que el 100% de la anchura del contenedor. Si es inferior, se siguen mostrando en línea pero conservan su tamaño. Este es el valor por defecto, y como veíamos en el ejemplo 1, aunque la anchura de los elementos es el 25% del contenedor, todos se muestran en línea modificando su tamaño para que la suma total no sea superior al 100% de su contenedor.
+        – flex-wrap:wrap; -> Los elementos se muestran en línea, pero si su anchura supera la del contenedor, se distribuyen en varias filas.
+        – flex-wrap:wrap-reverse; -> Los elementos se muestran en línea, pero si su anchura supera la del contenedor, se distribuyen en varias filas, y además lo hacen en orden inverso al de maquetación. */
+
+        /* CSS EJEMPLO 5: */
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Como comentábamos en los valores de la propiedad, en este caso los elementos se muestran en línea, pero como habíamos otorgado un valor de anchura del 25% del contenedor a los elementos, cuando la fila termina los elementos continúan en otra, y así sucesivamente. */
+
+
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 6: */
+
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap-reverse;
+        }
+
+        /* Este ejemplo de ordenación de Flexbox es muy curioso, ya que, además de realizar la adaptación de tamaños por filas como en el caso anterior, realiza su ordenación a la inversa, de abajo hacia arriba, y en este caso de izquierda a derecha (que es el sentido por defecto). */
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 7: */
+
+        .contenedor {
+            display: flex;
+            flex-direction: row-reverse;
+            flex-wrap: wrap-reverse;
+        }
+
+        /* Podemos modificar el sentido de la orientación horizontal si además utilizamos “flex-direction:row-reverse” como podemos ver en el siguiente ejemplo: */
+
+        /* flex-flow:
+        Estas mismas propiedades podemos especificarlas en una sola mediante “flex-flow” de la siguiente forma:
+
+        flex-flow: <flex-direction> <flex-wrap>
+
+        Por lo que el código anterior podría quedar de la siguiente forma:
+
+        CSS: */
+        .contenedor {
+            display: flex;
+            flex-flow: row-reverse wrap-reverse;
+        }
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 8: */
+
+        /* justify-content:
+        En cuanto a la alineación horizontal de los elementos en Flexbox, encontramos la propiedad “justify-content“, que alinea los elementos a lo largo del eje principal (main axis) de su contenedor, pero a diferencia de la alineación de un texto, en Flexbox hay que tener en cuenta también la dirección de los elementos. Esto lo veremos más claramente con los siguientes ejemplos tras la definición de sus valores más utilizados:
+
+        – justify-content:flex-start; -> Alinea los elementos en horizontal desde el inicio de la dirección del eje principal de su contenedor (partiendo desde el inicio de la línea). Este es el valor por defecto. Es importante destacar que, como veremos más adelante, la dirección establecida en “flex-direction” afecta a la alineación.
+        – justify-content:flex-end; -> Alinea los elementos en horizontal desde el final de la dirección del eje principal de su contenedor (partiendo desde el final de la línea)
+        – justify-content:center; -> Alinea los elementos al centro del eje principal de su contenedor. Similar a un texto alineado al centro.
+        – justify-content:space-between; -> Alinea los elementos justificándolos a lo largo del eje principal de su contenedor. Similar a un texto justificado. Los elementos laterales se pegan a los extremos y el resto se distribuyen a lo largo del eje principal dejando el mismo espacio entre ellos.
+        – justify-content:space-around; -> Alinea los elementos distribuyendo sus centros de forma horizontal a lo largo del eje principal de su contenedor, dejando el mismo espacio lateral de separación al comienzo, al final y entre ellos.
+        Esta propiedad como mejor se comprende es mediante un ejemplo, ya que si probamos “justify-content:flex-start” con el resto de propiedades por defecto, obtendremos un resultado similar a la alineación de un texto a la izquierda. Pero… ¿y si la dirección es inversa? En este caso obtendríamos que la alineación sería a la derecha, ya que lo que Flexbox toma en cuenta para la alineación de los elementos es el inicio de la dirección del eje (ya sea principal –horizontal- o transversal –vertical-, como veremos más tarde). */
+
+        .contenedor {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        /* En este caso vemos que la alineación de los elementos es a la izquierda de su contenedor. */
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 9: */
+
+        .contenedor {
+            display: flex;
+            flex-direction: row-reverse;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        /* Vemos que en este caso los elementos se alinean a la derecha. Se puede llegar a pensar que “justify-content:flex-start” realmente no está haciendo nada, ya que en los ejemplos 1 y 2 ya obteníamos estos resultados sin necesidad de esta propiedad, pero… ¿y si queremos que la dirección de los elementos sea inversa pero estén alineados a la izquierda? Si cambiamos la propiedad a “justify-content:flex-end” conseguimos dicho resultado, comprobando que realmente funciona: */
+
+        /* ////////////////////////// */
+        /* ////////////////////////// */
+
+        /* CSS EJEMPLO 10: */
+        .contenedor {
+            display: flex;
+            flex-direction: row-reverse;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+
+            /* A continuación comprobamos mediante ejemplos los valores de alineación horizontal que ya hemos visto, realizando modificaciones en la anchura de los elementos para que se puedan comprender mejor sus efectos. Primero una alineación al centro: */
+
+            /* ////////////////////////// */
+            /* ////////////////////////// */
+
+            /* CSS EJEMPLO 11: */
+
+            .contenedor {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .elemento {
+                width: 21%;
+            }
+
+            /* Ahora veremos una alineación “justificada”. La separación entre la línea superior e inferior es diferente debido al número de elementos entre ellas: */
+
+            /* ////////////////////////// */
+            /* ////////////////////////// */
+
+            /* CSS EJEMPLO 12: */
+
+            .contenedor {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .elemento {
+                width: 21%;
+            }
+
+            /* Y ahora una alineación distribuyendo sus centros horizontales. En este caso podemos ver que se crea una especie de “márgenes laterales similares” entre los elementos (y entre líneas, dependiendo del número de elementos que existan en cada una de ellas). */
+
+            /* ////////////////////////// */
+            /* ////////////////////////// */
+
+            /* CSS EJEMPLO 13: */
+
+            .contenedor {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            .elemento {
+                width: 21%;
+            }
+
+            /* align-items | align-self | align-content:
+
+        La alineación vertical se realiza a través del llamado “eje transversal” (cross axis), y para ello contamos con tres propiedades diferentes, “align-items”, “align-self” y “align-content”. Aquí viene el lío, ya que si no se entiende el concepto muchas veces se obtienen resultados inesperados. Vamos a ver qué nos cuenta el W3C sobre estas propiedades:
+
+        – “align-items” establece la alineación predeterminada para todos los elementos del contenedor, incluidos los elementos independientes.
+        – “align-self” permite alinear elementos independientes del contenedor.
+        – “align-content” alinea las líneas/filas de elementos de un contenedor.
+        Flexbox align
+
+        Por lo tanto, “align-items” nos sirve para alinear los elementos y “align-content” para alinear las filas de éstos, mientras que “align-self” nos permite alinear elementos de forma independiente. Sabiendo esto, podemos deducir que “align-content” sólo funciona cuando tenemos más de una fila de elementos. La imagen superior representa muy bien cómo funcionan estas propiedades. A continuación veremos los valores que pueden tomar cada una de ellas (los valores de “align-items” son válidos para “align-self”):
+
+        – align-items:stretch; -> Valor por defecto. La altura de los elementos se ajusta al tamaño del contenedor (o fila), dividiendo el espacio sobrante entre todos los elementos por igual. */
+
+
+
+            /* ////////////////////////// */
+            /* ////////////////////////// */
+
+            /* CSS EJEMPLO 14: */
+
+            .contenedor {
+                height: 240px;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: flex-start;
+                align-items: stretch;
+            }
+
+            .elemento {
+                width: 21%;
+            }
+        /* – align-items:flex-start; -> Alinea en vertical los elementos desde el inicio de la dirección del eje transversal de su contenedor (al igual que ocurría en horizontal). También afecta el valor de “flex-direction” al sentido de la alineación vertical. */
+
+            /* ////////////////////////// */
+            /* ////////////////////////// */
+
+
+
+            /* ////////////////////////// */
+            /* ////////////////////////// */
+
+
+
+            /* ////////////////////////// */
+            /* ////////////////////////// */
+
+
+
+            /* ////////////////////////// */
+    </style>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
